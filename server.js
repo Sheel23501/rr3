@@ -476,7 +476,7 @@ app.delete('/api/twilio/rooms/:roomName', async (req, res) => {
   }
 });
 
-const PORT = 4000; // Changed port from 3001 to 4000
+const PORT = process.env.PORT || 4000;
 
 // Create HTTP server and attach Socket.IO for WebRTC signaling
 const httpServer = createServer(app);
