@@ -790,7 +790,8 @@ const distPath = path.join(process.cwd(), 'dist');
 if (fs.existsSync(distPath)) {
   app.use(express.static(distPath));
   // SPA catch-all: serve index.html for any non-API route
-  app.get('*', (req, res, next) => {
+  app.use((req, res, next) => {
+    if (req.method !== 'GET') return next();
     if (req.path.startsWith('/api') || req.path.startsWith('/socket.io')) return next();
     res.sendFile(path.join(distPath, 'index.html'));
   });
